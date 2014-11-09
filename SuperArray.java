@@ -61,4 +61,26 @@ public class SuperArray{
 	data = newArray;
     }
 
+    public void clear(){
+	Object[] temp = new Object[data.length];
+	data = temp;
+    }
+
+    public Object get(int index){
+	if (index < 0 || index >= size()){
+	    System.out.println("Index out of range!");
+	    return null;
+	}else{
+	    return data[index];
+	}
+    }
+
+    public void set(int index, Object e){
+	if (index < 0 || index >= size()){
+	    System.out.println("Index out of range!");
+	}else{
+	    data[index] = e;
+	}
+    }
+
 }
