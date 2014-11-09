@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SuperArray{
     private Object[] data;
     private int stuff; //current number of stored elements
@@ -75,12 +77,32 @@ public class SuperArray{
 	}
     }
 
-    public void set(int index, Object e){
+    public Object set(int index, Object o){
 	if (index < 0 || index >= size()){
 	    System.out.println("Index out of range!");
+	    return null;
 	}else{
-	    data[index] = e;
+	    Object replaced = data[index];
+	    data[index] = o;
+	    return replaced;
 	}
+    }
+
+    public void add(int index, Object o){
+	Object[] temp = new Object[data.length];
+	for(int i = 0; i < index; i++){
+	    temp[i] = data[i];
+	}
+	temp[index] = o;
+	Object[] copy = data.clone();
+	data = temp;
+	for(int i = index; i < copy.length; i++){
+	    add(copy[i]);
+	}
+    }
+
+    public Object remove(int index){
+	//working on remove now!
     }
 
 }
