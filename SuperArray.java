@@ -1,8 +1,6 @@
-import java.util.*;
-
 public class SuperArray{
     private Object[] data;
-    private int stuff; //current number of stored elements
+    private int stuff; //current number of stored elements // I also never figured out when to use this variable haha--
 
     public SuperArray(){
 	data = new Object[10];
@@ -89,7 +87,7 @@ public class SuperArray{
     }
 
     public void add(int index, Object o){
-	Object[] temp = new Object[data.length];
+	Object[] temp = new Object[size()];
 	for(int i = 0; i < index; i++){
 	    temp[i] = data[i];
 	}
@@ -101,8 +99,27 @@ public class SuperArray{
 	}
     }
 
+    // note- I assumed remove would make the capacity smaller when the object at the given index is null. Either that or I'm really slow.
+
     public Object remove(int index){
-	//working on remove now!
+	if (index < 0 || index >= size()){
+	    System.out.println("Index out of range!");
+	    return null;
+	}
+	Object removed = data[index];
+	Object[] temp = new Object[size()];
+	for(int i = 0; i < index; i++){
+	    temp[i] = data[i];
+	}
+	Object[] copy = data.clone();
+	data = temp;
+	if (removed == null){
+	    resize(data.length-1);
+	}
+	for(int i = index+1; i < copy.length; i++){
+	    add(copy[i]);
+	}
+        return removed;
     }
 
 }
