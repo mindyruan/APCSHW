@@ -51,11 +51,18 @@ public class WordGrid{
      *@param col is the horizontal location of where you want the word to start.
      *@return true when the word is added successfully. When the word doesn't fit,
      *or there are overlapping letters that do not match, then false is returned.
-     
-    public boolean addWordHorizontal(String word,int row, int col){
-	
+     */
+
+    public String addWordHorizontal(String word,int row, int col){
+	if (col + word.length() <= data[row].length){
+	    return "true-->";
+	}else if (col + 1 >= word.length()){
+	    return "true<--";
+	}else{
+	    return "false";
+	}
     }
-    */
+    
 
     //vertical + diagonal should be implemented as well.
 
