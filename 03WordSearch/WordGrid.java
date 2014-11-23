@@ -53,16 +53,33 @@ public class WordGrid{
      *or there are overlapping letters that do not match, then false is returned.
      */
 
-    public String addWordHorizontal(String word,int row, int col){
+    public boolean addWordHorizontal(String word,int row, int col){
 	if (col + word.length() <= data[row].length){
-	    return "true-->";
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		col++;
+	    }
+	    System.out.println("-->");
+	    return true;
 	}else if (col + 1 >= word.length()){
-	    return "true<--";
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		col--;
+	    }
+	    System.out.println("<--");
+	    return true;
 	}else{
-	    return "false";
+	    System.out.println("did not fill");
+	    return false;
 	}
     }
     
+    public boolean noOverlap(char s, char c){
+	if (c=='-'){
+	    return true;
+	}
+	return(s==c);
+    }
 
     //vertical + diagonal should be implemented as well.
 
