@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class WordGrid{
     private char[][]data;
@@ -9,17 +9,22 @@ public class WordGrid{
      *@param col is the starting width of the WordGrid
      */
     public WordGrid(int rows,int cols){
-        char[][]ech = new char[rows][cols];
+        data = new char[rows][cols];
+	clear();
 /*{
 	    {'a','b','c'},
 	    {'e','f','g'},
 	    {'i','j','k'}
 	    };*/
-	data = ech;
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
     private void clear(){
+	for (int i = 0; i < data.length; i++){
+	    for (int x = 0; x < data[i].length; x++){
+		data[i][x] = '-';
+	    }
+	}
     }
 
     /**The proper formatting for a WordGrid is created in the toString.
@@ -30,11 +35,7 @@ public class WordGrid{
 	String ans = "";
         for(int i = 0; i < data.length; i++){
 	    for(int x = 0; x < data[i].length; x++){
-		if(data[i][x]==0){
-		    ans += "c ";  //c is a temporary placeholder
-		}else{
-		    ans += data[i][x] + " ";
-		}
+	        ans += data[i][x] + " ";
 	    }
 	    ans += "\n";
 	}
