@@ -73,6 +73,27 @@ public class WordGrid{
 	    return false;
 	}
     }
+
+    public boolean addWordVertical(String word,int row, int col){
+        if (row + word.length() <= data[col].length){
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		row++;
+	    }
+	    System.out.println("-->");
+	    return true;
+	}else if (row + 1 >= word.length()){
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		row--;
+	    }
+	    System.out.println("<--");
+	    return true;
+	}else{
+	    System.out.println("did not fill");
+	    return false;
+	}
+    }
     
     public boolean noOverlap(char s, char c){
 	if (c=='-'){
