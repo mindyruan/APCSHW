@@ -10,10 +10,17 @@ public class WordSearch{
 	System.out.println(g.toString());
 	*/
 
-	// VERTICAL
+	/* VERTICAL
 	System.out.println(g.addWordVertical("cat", 0,0));
 	System.out.println(g.addWordVertical("cat", 2,2));
 	System.out.println(g.addWordVertical("wrecked", 2,1));
+	System.out.println(g.toString());
+	*/
+
+	// DIAGONAL
+	System.out.println(g.addWordDiagonal("cat", 0,1));
+	System.out.println(g.addWordDiagonal("cat", 2,2));
+	System.out.println(g.addWordDiagonal("wrecked", 2,1));
 	System.out.println(g.toString());
     }
 
