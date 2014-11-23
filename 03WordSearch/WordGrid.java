@@ -59,14 +59,14 @@ public class WordGrid{
 		data[row][col] = word.charAt(i);
 		col++;
 	    }
-	    System.out.println("-->");
+	    System.out.println("right");
 	    return true;
 	}else if (col + 1 >= word.length()){
 	    for (int i = 0; i < word.length(); i++){
 		data[row][col] = word.charAt(i);
 		col--;
 	    }
-	    System.out.println("<--");
+	    System.out.println("left");
 	    return true;
 	}else{
 	    System.out.println("did not fill");
@@ -80,14 +80,37 @@ public class WordGrid{
 		data[row][col] = word.charAt(i);
 		row++;
 	    }
-	    System.out.println("-->");
+	    System.out.println("down");
 	    return true;
 	}else if (row + 1 >= word.length()){
 	    for (int i = 0; i < word.length(); i++){
 		data[row][col] = word.charAt(i);
 		row--;
 	    }
-	    System.out.println("<--");
+	    System.out.println("up");
+	    return true;
+	}else{
+	    System.out.println("did not fill");
+	    return false;
+	}
+    }
+
+    public boolean addWordDiagonal(String word, int row, int col){
+        if (row + word.length() <= data[col].length && col + word.length() <= data[row].length){
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		row++;
+		col++;
+	    }
+	    System.out.println("down");
+	    return true;
+	}else if (row + 1 >= word.length() && col + 1 >= word.length()){
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		row--;
+		col--;
+	    }
+	    System.out.println("up");
 	    return true;
 	}else{
 	    System.out.println("did not fill");
