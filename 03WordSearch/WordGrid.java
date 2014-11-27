@@ -2,6 +2,7 @@ import java.util.*;
 
 public class WordGrid{
     private char[][]data;
+    private String[]temp = {"cat","hat","fish","eggs","ham","seuss","sam"};
 
     /**Initialize the grid to the size specified and fill all of the positions
      *with spaces.
@@ -16,6 +17,7 @@ public class WordGrid{
 	addWord("cake",1,1,1,0);
 	addWord("happy",0,0,1,0);
 	addWord("happy",0,0,0,1);
+	fill();
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
@@ -64,6 +66,16 @@ public class WordGrid{
 	    col += dx;
 	}
 	return true;
+    }
+
+    private void fill(){
+	for (int i = 0; i < data.length; i++){
+	    for (int c = 0; c < data[i].length; c++){
+		if (data[i][c]=='-'){
+		    data[i][c] = (char)('a'+(int)(Math.random()*26));
+		}
+	    }
+	}
     }
 
 }
