@@ -11,11 +11,11 @@ public class WordGrid{
     public WordGrid(int rows,int cols){
         data = new char[rows][cols];
 	clear();
-/*{
-	    {'a','b','c'},
-	    {'e','f','g'},
-	    {'i','j','k'}
-	    };*/
+	addWord("jerk",0,4,0,1);
+	addWord("top",2,1,1,0);
+	addWord("cake",1,1,1,0);
+	addWord("happy",0,0,1,0);
+	addWord("happy",0,0,0,1);
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
@@ -27,10 +27,6 @@ public class WordGrid{
 	}
     }
 
-    /**The proper formatting for a WordGrid is created in the toString.
-     *@return a String with each character separated by spaces, and each row
-     *separated by newlines.
-     */
     public String toString(){
 	String ans = "";
         for(int i = 0; i < data.length; i++){
@@ -42,89 +38,32 @@ public class WordGrid{
 	return ans;
     }
 
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from left to right, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
-     *@param col is the horizontal location of where you want the word to start.
-     *@return true when the word is added successfully. When the word doesn't fit,
-     *or there are overlapping letters that do not match, then false is returned.
-     */
+    private boolean addWord(String word, int row, int col, int dx, int dy){
+	if (checkWord(word, row, col, dx, dy)){
+	    for (int i = 0; i < word.length(); i++){
+		data[row][col]  = word.charAt(i);
+		row += dy;
+		col += dx;
+	    }
+	    return true;
+	}
+	return false;
+    }
 
-    public boolean addWordHorizontal(String word,int row, int col){
-	if (col + word.length() <= data[row].length){
-	    for (int i = 0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		col++;
-	    }
-	    System.out.println("right");
-	    return true;
-	}else if (col + 1 >= word.length()){
-	    for (int i = 0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		col--;
-	    }
-	    System.out.println("left");
-	    return true;
-	}else{
-	    System.out.println("did not fill");
+    private boolean checkWord(String word, int row, int col, int dx, int dy){
+	if (dx == 0 && dy == 0 ||
+	    row < 0 || col < 0 ||
+	    col + dx * word.length() > data[0].length || col + dx * word.length() < -1 || row + dy * word.length() > data.length || row + dy * word.length() < -1){
 	    return false;
 	}
-    }
-
-    public boolean addWordVertical(String word,int row, int col){
-        if (row + word.length() <= data[col].length){
-	    for (int i = 0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		row++;
+	for (int i = 0; i < word.length(); i++){
+	    if (data[row][col] != '-' && data[row][col] != word.charAt(i)){
+		return false;
 	    }
-	    System.out.println("down");
-	    return true;
-	}else if (row + 1 >= word.length()){
-	    for (int i = 0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		row--;
-	    }
-	    System.out.println("up");
-	    return true;
-	}else{
-	    System.out.println("did not fill");
-	    return false;
+	    row += dy;
+	    col += dx;
 	}
+	return true;
     }
-
-    public boolean addWordDiagonal(String word, int row, int col){
-        if (row + word.length() <= data[col].length && col + word.length() <= data[row].length){
-	    for (int i = 0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		row++;
-		col++;
-	    }
-	    System.out.println("down");
-	    return true;
-	}else if (row + 1 >= word.length() && col + 1 >= word.length()){
-	    for (int i = 0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		row--;
-		col--;
-	    }
-	    System.out.println("up");
-	    return true;
-	}else{
-	    System.out.println("did not fill");
-	    return false;
-	}
-    }
-    
-    public boolean noOverlap(char s, char c){
-	if (c=='-'){
-	    return true;
-	}
-	return(s==c);
-    }
-
-    //vertical + diagonal should be implemented as well.
 
 }
