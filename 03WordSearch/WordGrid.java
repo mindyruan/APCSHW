@@ -12,11 +12,12 @@ public class WordGrid{
     public WordGrid(int rows,int cols){
         data = new char[rows][cols];
 	clear();
-	addWord("jerk",0,4,0,1);
-	addWordRandomly("top");
-	addWordRandomly("cake");
-	addWordRandomly("happy");
-	addWordRandomly("happy");
+	addWordList(temp);
+	//addWord("jerk",0,4,0,1);
+	//addWordRandomly("top");
+	//addWordRandomly("cake");
+	//addWordRandomly("happy");
+	//addWordRandomly("happy");
 	//fill();
     }
 
@@ -63,8 +64,10 @@ public class WordGrid{
 	return (attempts != 0);
     }
 
-    public boolean addWordList(String[]words){
-	return true; //placeholder til I can get to this
+    public void addWordList(String[]words){
+        for (int i = 0; i < words.length; i++){
+	    addWordRandomly(words[i]);
+	}
     }
 
     private boolean checkWord(String word, int row, int col, int dx, int dy){
