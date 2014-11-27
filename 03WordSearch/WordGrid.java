@@ -13,11 +13,11 @@ public class WordGrid{
         data = new char[rows][cols];
 	clear();
 	addWord("jerk",0,4,0,1);
-	addWord("top",2,1,1,0);
-	addWord("cake",1,1,1,0);
-	addWord("happy",0,0,1,0);
-	addWord("happy",0,0,0,1);
-	fill();
+	addWordRandomly("top");
+	addWordRandomly("cake");
+	addWordRandomly("happy");
+	addWordRandomly("happy");
+	//fill();
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
@@ -50,6 +50,21 @@ public class WordGrid{
 	    return true;
 	}
 	return false;
+    }
+
+    private boolean addWordRandomly(String word){
+	int attempts = 5;
+	Random r = new Random();
+	boolean victory;
+	do{
+	    victory = addWord(word,r.nextInt(data.length),r.nextInt(data[0].length), r.nextInt(3)-1, r.nextInt(3)-1); //r.nextInt(3)-1 generates -1,0,1
+	    attempts--;
+	}while(!victory && attempts > 0);
+	return (attempts != 0);
+    }
+
+    public boolean addWordList(String[]words){
+	return true; //placeholder til I can get to this
     }
 
     private boolean checkWord(String word, int row, int col, int dx, int dy){
