@@ -7,24 +7,12 @@ public class WordGrid{
     private long seed,ans;
     Random r;
 
-    /**Initialize the grid to the size specified and fill all of the positions
-     *with spaces.
-     *@param row is the starting height of the WordGrid
-     *@param col is the starting width of the WordGrid
-     */
-
-    public WordGrid(int rows,int cols){
-        data = new char[rows][cols];
+    public WordGrid(int rows,int cols,int s){
+	data = new char[rows][cols];
 	key = new char[rows][cols];
 	clear();
-	//fill();
-    }
-
-    public WordGrid(int rows,int cols,int s,int answer){
-	this(rows,cols);
 	setSeed(s);
 	r = new Random(seed);
-	//fill();
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
