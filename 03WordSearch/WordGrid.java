@@ -2,22 +2,25 @@ import java.util.*;
 
 public class WordGrid{
     private char[][]data;
-    private String[]temp = {"cat","hat","fish","eggs","ham","seuss","sam"};
+    private long seed,ans;
+    Random r;
 
     /**Initialize the grid to the size specified and fill all of the positions
      *with spaces.
      *@param row is the starting height of the WordGrid
      *@param col is the starting width of the WordGrid
      */
+
     public WordGrid(int rows,int cols){
         data = new char[rows][cols];
 	clear();
-	addWordList(temp);
-	//addWord("jerk",0,4,0,1);
-	//addWordRandomly("top");
-	//addWordRandomly("cake");
-	//addWordRandomly("happy");
-	//addWordRandomly("happy");
+	//fill();
+    }
+
+    public WordGrid(int rows,int cols,int s,int answer){
+	this(rows,cols);
+	setSeed(s);
+	r = new Random(seed);
 	//fill();
     }
 
@@ -40,7 +43,11 @@ public class WordGrid{
 	}
 	return ans;
     }
-
+    
+    public void setSeed(long x){
+	seed = x;
+    }
+    
     private boolean addWord(String word, int row, int col, int dx, int dy){
 	if (checkWord(word, row, col, dx, dy)){
 	    for (int i = 0; i < word.length(); i++){
@@ -54,8 +61,9 @@ public class WordGrid{
     }
 
     private boolean addWordRandomly(String word){
-	int attempts = 5;
-	Random r = new Random();
+	int attempts = 100;
+	//Random r = new Random(seed);
+	r.setSeed(seed);
 	boolean victory;
 	do{
 	    victory = addWord(word,r.nextInt(data.length),r.nextInt(data[0].length), r.nextInt(3)-1, r.nextInt(3)-1); //r.nextInt(3)-1 generates -1,0,1
@@ -64,10 +72,14 @@ public class WordGrid{
 	return (attempts != 0);
     }
 
-    public void addWordList(String[]words){
-        for (int i = 0; i < words.length; i++){
-	    addWordRandomly(words[i]);
+    public void addWordList(ArrayList<String> words){
+	ArrayList<String> added = new ArrayList<String>();
+        for (int i = 0; i < words.size(); i++){
+	    if(addWordRandomly(words.get(i))){
+		added.add(words.get(i));
+	    }
 	}
+	System.out.println("find: "+added);
     }
 
     private boolean checkWord(String word, int row, int col, int dx, int dy){
@@ -97,3 +109,4 @@ public class WordGrid{
     }
 
 }
+
