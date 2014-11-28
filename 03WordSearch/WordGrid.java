@@ -2,6 +2,7 @@ import java.util.*;
 
 public class WordGrid{
     private char[][]data;
+    private char[][]key;
     private long seed,ans;
     Random r;
 
@@ -13,6 +14,7 @@ public class WordGrid{
 
     public WordGrid(int rows,int cols){
         data = new char[rows][cols];
+	key = new char[rows][cols];
 	clear();
 	//fill();
     }
@@ -29,6 +31,7 @@ public class WordGrid{
 	for (int i = 0; i < data.length; i++){
 	    for (int x = 0; x < data[i].length; x++){
 		data[i][x] = '-';
+		key[i][x] = '-';
 	    }
 	}
     }
@@ -43,6 +46,17 @@ public class WordGrid{
 	}
 	return ans;
     }
+
+    public String toKey(){
+	String ans = "";
+        for(int i = 0; i < key.length; i++){
+	    for(int x = 0; x < key[i].length; x++){
+	        ans += key[i][x] + " ";
+	    }
+	    ans += "\n";
+	}
+	return ans;
+    }
     
     public void setSeed(long x){
 	seed = x;
@@ -52,6 +66,7 @@ public class WordGrid{
 	if (checkWord(word, row, col, dx, dy)){
 	    for (int i = 0; i < word.length(); i++){
 		data[row][col]  = word.charAt(i);
+		key[row][col] = word.charAt(i);
 		row += dy;
 		col += dx;
 	    }
@@ -79,6 +94,7 @@ public class WordGrid{
 		added.add(words.get(i));
 	    }
 	}
+	fill();
 	System.out.println("find: "+added);
     }
 
@@ -109,4 +125,3 @@ public class WordGrid{
     }
 
 }
-
