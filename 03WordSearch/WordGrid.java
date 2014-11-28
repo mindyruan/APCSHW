@@ -107,7 +107,7 @@ public class WordGrid{
 	for (int i = 0; i < data.length; i++){
 	    for (int c = 0; c < data[i].length; c++){
 		if (data[i][c]=='-'){
-		    data[i][c] = (char)('a'+(int)(Math.random()*26));
+		    data[i][c] = (char)('a'+r.nextInt(26));
 		}
 	    }
 	}
