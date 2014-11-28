@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class WordGrid{
     private char[][]data;
@@ -121,6 +122,27 @@ public class WordGrid{
 		    data[i][c] = (char)('a'+(int)(Math.random()*26));
 		}
 	    }
+	}
+    }
+
+    public void loadWordsFromFile(String fileName, boolean fillRandomLetters){
+	try{
+	    File words = new File(fileName);
+	    Scanner infile = new Scanner(words);
+	    ArrayList<String> bank = new ArrayList<String>();
+	    Random r = new Random();
+	    while(infile.hasNext()){
+		bank.add(infile.next());
+	    }
+	    int size = bank.size();
+	    addWordList(bank);
+	    System.out.println(toString());
+	    if(fillRandomLetters == true){
+		System.out.println(toKey());
+	    }
+	}
+	catch(FileNotFoundException e){
+	    System.out.println("lol what file");
 	}
     }
 
