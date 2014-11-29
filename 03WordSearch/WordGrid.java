@@ -85,6 +85,16 @@ public class WordGrid{
 	}
 	fill();
 	System.out.println("find: "+added);
+	System.out.println(wordsInPuzzle(added));
+    }
+
+    public String wordsInPuzzle(ArrayList<String> arr){
+	String ech = "Find these words:\n";
+        for (int i = 0; i < arr.size(); i++){
+	    ech += arr.get(i);
+	    ech += "\t\t";
+	}
+	return ech;
     }
 
     private boolean checkWord(String word, int row, int col, int dx, int dy){
