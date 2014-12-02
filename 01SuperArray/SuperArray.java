@@ -19,15 +19,6 @@ public class SuperArray{
 	return ans;
     }
 
-    public void bigger(Object e){
-	Object[] temp = new Object[data.length+1];
-	for(int i = 0; i < data.length ; i++){
-	    temp[i] = data[i];
-	}
-	temp[temp.length-1] = e;
-	data = temp;
-    }
-
     public void add(Object e){
 	if (size() < data.length){
 	    data[size()] = e;
@@ -49,7 +40,6 @@ public class SuperArray{
 
     public void resize(int newCapacity){
 	Object[] newArray = new Object[newCapacity];
-	//new size is bigger
 	for (int i = 0; i < newCapacity; i++){
 	    if (i < data.length){
 		newArray[i] = data[i];
