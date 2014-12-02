@@ -1,9 +1,9 @@
 public class SuperArray{
     private Object[] data;
-    private int stuff; //current number of stored elements // I also never figured out when to use this variable haha--
+    private int stuff;
 
     public SuperArray(){
-	data = new Object[10];
+	this(10);
     }
 
     public SuperArray(int x){
@@ -29,32 +29,29 @@ public class SuperArray{
     }
 
     public void add(Object e){
-	for(int i = 0; i<data.length; i++){
-	    if (data[i] == null){
-		data[i] = e;
-		break;
-	    }
-	    if(i==data.length-1){
-	        bigger(e);
-		break;
-	    }
+	if (size() < data.length){
+	    data[size()] = e;
+	}else{
+	    resize(size()*2);
+	    add(e);
 	}
     }
 
     public int size(){
-	return data.length;
+	stuff = 0;
+        for (int i = 0; i < data.length; i++){
+	    if (data[i] != null){
+		stuff++;
+	    }
+	}
+	return stuff;
     }
 
     public void resize(int newCapacity){
 	Object[] newArray = new Object[newCapacity];
 	//new size is bigger
-	if(data.length <= newCapacity){
-	    for(int i = 0; i < data.length; i++){
-		newArray[i] = data[i];
-	    }
-        //new size is smaller
-	}else{
-	    for(int i = 0; i < newCapacity; i++){
+	for (int i = 0; i < newCapacity; i++){
+	    if (i < data.length){
 		newArray[i] = data[i];
 	    }
 	}
@@ -62,7 +59,7 @@ public class SuperArray{
     }
 
     public void clear(){
-	Object[] temp = new Object[data.length];
+	Object[] temp = new Object[10];
 	data = temp;
     }
 
@@ -87,19 +84,20 @@ public class SuperArray{
     }
 
     public void add(int index, Object o){
-	Object[] temp = new Object[size()];
-	for(int i = 0; i < index; i++){
-	    temp[i] = data[i];
+	if (index < 0 || index >= size()){
+	    throw new IndexOutOfBoundsException();
 	}
-	temp[index] = o;
-	Object[] copy = data.clone();
-	data = temp;
-	for(int i = index; i < copy.length; i++){
-	    add(copy[i]);
+	if(index == data.length){ 
+	    add(o);
+	}else{
+	    Object temp = data[index];
+	    data[index] = o;
+	    for (int i = index+1; i < size(); i++){
+	        temp = set(i,temp); //new temp is the replaced object
+	    }
+	    add(temp);
 	}
     }
-
-    // note- I assumed remove would make the capacity smaller when the object at the given index is null. Either that or I'm really slow.
 
     public Object remove(int index){
 	if (index < 0 || index >= size()){
@@ -107,17 +105,15 @@ public class SuperArray{
 	    return null;
 	}
 	Object removed = data[index];
-	Object[] temp = new Object[size()];
-	for(int i = 0; i < index; i++){
-	    temp[i] = data[i];
+	for(int i = 0; i < size(); i++){
+	    if (i == size() - 1){
+		data[i] = null;
+	    }else{
+		data[i] = data[i+1];
+	    }
 	}
-	Object[] copy = data.clone();
-	data = temp;
-	if (removed == null){
-	    resize(data.length-1);
-	}
-	for(int i = index+1; i < copy.length; i++){
-	    add(copy[i]);
+	if (size() <= data.length/2){
+	    this.resize(size()*2);
 	}
         return removed;
     }
