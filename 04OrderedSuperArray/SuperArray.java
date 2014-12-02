@@ -1,5 +1,5 @@
 public class SuperArray{
-    private Object[] data;
+    private String[] data;
     private int stuff;
 
     public SuperArray(){
@@ -7,7 +7,7 @@ public class SuperArray{
     }
 
     public SuperArray(int x){
-	data = new Object[x];
+	data = new String[x];
     }
 
     public String toString(){
@@ -19,16 +19,7 @@ public class SuperArray{
 	return ans;
     }
 
-    public void bigger(Object e){
-	Object[] temp = new Object[data.length+1];
-	for(int i = 0; i < data.length ; i++){
-	    temp[i] = data[i];
-	}
-	temp[temp.length-1] = e;
-	data = temp;
-    }
-
-    public void add(Object e){
+    public void add(String e){
 	if (size() < data.length){
 	    data[size()] = e;
 	}else{
@@ -48,8 +39,7 @@ public class SuperArray{
     }
 
     public void resize(int newCapacity){
-	Object[] newArray = new Object[newCapacity];
-	//new size is bigger
+	String[] newArray = new String[newCapacity];
 	for (int i = 0; i < newCapacity; i++){
 	    if (i < data.length){
 		newArray[i] = data[i];
@@ -59,11 +49,11 @@ public class SuperArray{
     }
 
     public void clear(){
-	Object[] temp = new Object[10];
+	String[] temp = new String[10];
 	data = temp;
     }
 
-    public Object get(int index){
+    public String get(int index){
 	if (index < 0 || index >= size()){
 	    System.out.println("Index out of range!");
 	    return null;
@@ -72,25 +62,25 @@ public class SuperArray{
 	}
     }
 
-    public Object set(int index, Object o){
+    public String set(int index, String o){
 	if (index < 0 || index >= size()){
 	    System.out.println("Index out of range!");
 	    return null;
 	}else{
-	    Object replaced = data[index];
+	    String replaced = data[index];
 	    data[index] = o;
 	    return replaced;
 	}
     }
 
-    public void add(int index, Object o){
+    public void add(int index, String o){
 	if (index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
 	if(index == data.length){ 
 	    add(o);
 	}else{
-	    Object temp = data[index];
+	    String temp = data[index];
 	    data[index] = o;
 	    for (int i = index+1; i < size(); i++){
 	        temp = set(i,temp); //new temp is the replaced object
@@ -99,12 +89,12 @@ public class SuperArray{
 	}
     }
 
-    public Object remove(int index){
+    public String remove(int index){
 	if (index < 0 || index >= size()){
 	    System.out.println("Index out of range!");
 	    return null;
 	}
-	Object removed = data[index];
+	String removed = data[index];
 	for(int i = 0; i < size(); i++){
 	    if (i == size() - 1){
 		data[i] = null;
