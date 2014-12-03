@@ -4,7 +4,7 @@ import java.io.*;
 public class WordGrid{
     private char[][]data;
     private char[][]key;
-    private long seed,ans;
+    private long seed;
     Random r;
 
     public WordGrid(int rows,int cols,int s){
@@ -84,15 +84,27 @@ public class WordGrid{
 	    }
 	}
 	fill();
-	System.out.println("find: "+added);
-	System.out.println(wordsInPuzzle(added));
+	//System.out.println("find: "+added);
+	System.out.println(wordsInPuzzle2(added));
     }
 
     public String wordsInPuzzle(ArrayList<String> arr){
 	String ech = "Find these words:\n";
         for (int i = 0; i < arr.size(); i++){
 	    ech += arr.get(i);
-	    ech += "\t\t";
+	    ech += "\t\t\t";
+	}
+	return ech;
+    }
+
+    public String wordsInPuzzle2(ArrayList<String> arr){	
+	String ech = "Find these words:\n";
+	for (int i = 0; i < arr.size(); i++){
+	    ech += arr.get(i);
+	    ech += "     \t";
+	    if (i != 0 && (i+1)%4 == 0){
+		ech += "\n";
+	    }
 	}
 	return ech;
     }
