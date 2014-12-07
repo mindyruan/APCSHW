@@ -1,8 +1,16 @@
 public class OrderedSuperArray extends SuperArray{
 
+    public OrderedSuperArray(){
+	super();;
+    }
+
+    public OrderedSuperArray(int x){
+	super(x);
+    }
+
     public void add(String s){
         if (s != null){
-	    int i = size();
+	    int i = size();  //i=3
 	    while (i > 0 && get(i-1).compareTo(s) > 0){
 		i--;
 	    }
