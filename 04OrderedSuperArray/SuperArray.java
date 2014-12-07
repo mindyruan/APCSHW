@@ -1,5 +1,5 @@
 public class SuperArray{
-    private String[] data;
+    public String[] data;
     private int stuff;
 
     public SuperArray(){
@@ -20,6 +20,7 @@ public class SuperArray{
     }
 
     public void add(String e){
+	System.out.println(size());
 	if (size() < data.length){
 	    data[size()] = e;
 	}else{
@@ -74,10 +75,11 @@ public class SuperArray{
     }
 
     public void add(int index, String o){
-	if (index < 0 || index >= size()){
+	if (index < 0 || index > size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	if(index == data.length){ 
+	if(index == data.length){
+	    resize(size()*2);
 	    add(o);
 	}else{
 	    String temp = data[index];
