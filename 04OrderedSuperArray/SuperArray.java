@@ -111,6 +111,15 @@ public class SuperArray{
         return removed;
     }
 
+    public int find(String s){
+	for (int i = 0; i < data.length; i++){
+	    if (data[i].equals(s)){
+		return i;
+	    }
+	}
+	return -1;
+    }
+
     public void sort(){
 	Arrays.sort(data);
     }
