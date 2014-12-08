@@ -146,4 +146,19 @@ public class SuperArray{
         }
     }
 
+    public void selectionSort(){
+	for (int  i = 0; i < size(); i++){
+	    int hold = i;
+	    for (int c = i; c < size(); c++){
+		if (data[hold].compareTo(data[c])> 0){
+		    hold = c;
+		}
+	    }
+	    //swap
+	    String s = data[hold];
+	    data[hold] = data[i];
+	    data[i] = s;
+	}
+    }
+
 }
