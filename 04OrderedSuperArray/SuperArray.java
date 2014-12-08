@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SuperArray{
     public String[] data;
     private int stuff;
@@ -20,7 +22,6 @@ public class SuperArray{
     }
 
     public void add(String e){
-	System.out.println(size());
 	if (size() < data.length){
 	    data[size()] = e;
 	}else{
@@ -108,6 +109,32 @@ public class SuperArray{
 	    this.resize(size()*2);
 	}
         return removed;
+    }
+
+    public void sort(){
+	Arrays.sort(data);
+    }
+
+    public void insertionSort(){
+	for (int i = 1; i < data.length; i++){
+	    if (data[i].compareTo(data[0]) < 0){
+		String hold = data[i];
+		for (int c = 0; c < i; c++){
+		    data[i-c] = data[i-c-1];
+		}
+		data[0] = hold;
+	    }
+	    for (int x = i; x > 0; x--){
+		if (data[i].compareTo(data[i-x]) > 0
+		    && data[i].compareTo(data[i-x+1]) < 0){
+		    String hold = data[i];
+		    for (int c = 0; c < x-1; c++){
+			data[i-c] = data[i-c-1];
+		    }
+		    data[i-x+1] = hold;
+		}
+	    }
+        }
     }
 
 }
