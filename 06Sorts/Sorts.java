@@ -16,7 +16,17 @@ public class Sorts{
     }
 
     public static void insertion(int[] a){
-
+	int hold;
+	int index;
+	for (int i = 1; i< a.length; i++){
+	    hold = a[i];
+	    index = i;
+	    while (index > 0 && hold < a[index - 1]){
+		a[index] = a[index - 1];
+		index --;
+	    }
+	    a[index] = hold;
+	}
     }
 
     public static void selection(int[] a){
@@ -52,7 +62,8 @@ public class Sorts{
 
 	toString(data);
 	//bubble(data);
-	selection(data);
+	//selection(data);
+	insertion(data);
 	toString(data);
     }
 
